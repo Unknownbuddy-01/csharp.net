@@ -1,0 +1,193 @@
+a) Create a class named Student with the following data members:
+Roll Number
+Name
+Course
+Marks
+Include methods to:
+Accept() student information.
+Display() student information.
+Calculate() and display the percentage.
+Solution:
+using System;
+namespace StudentManagement
+{
+class Student
+{
+// Data Members
+private int rollNo;
+private string name;
+private string course;
+private double marks;
+private double percentage;
+// Method to accept student information
+public void Accept()
+{
+Console.Write(&quot;Enter Roll Number: &quot;);
+rollNo = Convert.ToInt32(Console.ReadLine());
+Console.Write(&quot;Enter Student Name: &quot;);
+name = Console.ReadLine();
+Console.Write(&quot;Enter Course Name: &quot;);
+course = Console.ReadLine();
+Console.Write(&quot;Enter Marks (out of 100): &quot;);
+marks = Convert.ToDouble(Console.ReadLine());
+}
+// Method to calculate percentage
+public void Calculate()
+{
+percentage = marks; // Since marks are out of 100
+}
+// Method to display student information
+public void Display()
+{
+Console.WriteLine(&quot;\n----- Student Information -----&quot;);
+
+Console.WriteLine(&quot;Roll Number : &quot; + rollNo);
+Console.WriteLine(&quot;Name : &quot; + name);
+Console.WriteLine(&quot;Course : &quot; + course);
+Console.WriteLine(&quot;Marks : &quot; + marks);
+Console.WriteLine(&quot;Percentage : &quot; + percentage + &quot;%&quot;);
+}
+class Program
+{
+static void Main(string[] args)
+{
+Student s1 = new Student();
+s1.Accept();
+s1.Calculate();
+s1.Display();
+Console.WriteLine(&quot;\nPress any key to exit...&quot;);
+Console.ReadKey();
+}
+}
+}
+}
+
+
+b) Student Record Management
+Create a record named StudentRecord containing:
+Roll Number
+Name
+Department
+Create two student records and compare them for equality.
+Solution:
+using System;
+namespace StudentRecordDemo
+{
+class StudentRecord
+{
+public int RollNumber { get; set; }
+public string Name { get; set; }
+public string Department { get; set; }
+public override bool Equals(object obj)
+{
+StudentRecord s = obj as StudentRecord;
+if (s == null)
+return false;
+
+return RollNumber == s.RollNumber &amp;&amp;
+Name == s.Name &amp;&amp;
+Department == s.Department;
+}
+public override int GetHashCode()
+{
+return HashCode.Combine(
+RollNumber,
+Name,
+Department);
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+StudentRecord s1 = new StudentRecord()
+{
+RollNumber = 101,
+Name = &quot;Rahul Sharma&quot;,
+Department = &quot;Computer Science&quot;
+};
+StudentRecord s2 = new StudentRecord()
+{
+RollNumber = 101,
+Name = &quot;Rahul Sharma&quot;,
+Department = &quot;Computer Science&quot;
+};
+if (s1.Equals(s2))
+Console.WriteLine(&quot;Both student records are equal.&quot;);
+else
+Console.WriteLine(&quot;Both student records are not equal.&quot;);
+Console.ReadKey();
+}
+}
+}
+
+
+c) Employee Structure
+Create a structure named EmployeeStruct with:
+Employee ID
+Name
+Salary
+Display the employee information.
+
+Solution:
+using System;
+namespace EmployeeStructDemo
+{
+// Structure Definition
+struct EmployeeStruct
+{
+// Data Members
+public int EmployeeID;
+public string Name;
+public double Salary;
+// Method to display employee information
+public void Display()
+{
+Console.WriteLine(&quot;\n----- Employee Information -----&quot;);
+Console.WriteLine(&quot;Employee ID : &quot; + EmployeeID);
+Console.WriteLine(&quot;Name : &quot; + Name);
+Console.WriteLine(&quot;Salary : &quot; + Salary);
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+// Creating structure variable
+EmployeeStruct emp;
+// Accepting employee information
+Console.Write(&quot;Enter Employee ID: &quot;);
+emp.EmployeeID = Convert.ToInt32(Console.ReadLine());
+Console.Write(&quot;Enter Employee Name: &quot;);
+emp.Name = Console.ReadLine();
+Console.Write(&quot;Enter Employee Salary: &quot;);
+emp.Salary = Convert.ToDouble(Console.ReadLine());
+// Displaying employee information
+emp.Display();
+Console.WriteLine(&quot;\nPress any key to exit...&quot;);
+Console.ReadKey();
+}
+}
+}
+
+
+d) Write a C# .NET Core program to create a tuple that stores a student&#39;s Roll Number,
+Name, and Percentage and display the information.
+using System;
+namespace TupleDemo1
+{
+class Program
+{
+static void Main(string[] args)
+{
+var student = (RollNo: 101,
+Name: &quot;Rahul&quot;,
+Percentage: 85.5);
+Console.WriteLine(&quot;Student Information&quot;);
+Console.WriteLine(&quot;Roll No: &quot; + student.RollNo);
+Console.WriteLine(&quot;Name: &quot; + student.Name);
+Console.WriteLine(&quot;Percentage: &quot; + student.Percentage);
+Console.ReadLine();
+}
+}
+}
