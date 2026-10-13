@@ -1,0 +1,291 @@
+5.1. List Collection
+using System;
+using System.Collections.Generic;
+namespace CollectionsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+List<string> students = new List<string>();
+students.Add("Rahul");
+students.Add("Amit");
+students.Add("Priya");
+students.Add("Neha");
+Console.WriteLine("Student List");
+foreach (string s in students)
+{
+Console.WriteLine(s);
+}
+Console.ReadKey();
+}
+
+}
+}
+5.2 Stack Collection
+using System;
+using System.Collections;
+namespace CollectionsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+Stack stack = new Stack();
+stack.Push("Apple");
+stack.Push("Banana");
+stack.Push("Orange");
+Console.WriteLine("Removed Item : " + stack.Pop());
+Console.WriteLine("Remaining Items");
+foreach (object item in stack)
+{
+Console.WriteLine(item);
+}
+Console.ReadKey();
+}
+}
+}
+
+5.3 Queue Collection
+using System;
+using System.Collections;
+namespace CollectionsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+Queue q = new Queue();
+q.Enqueue("Student1");
+q.Enqueue("Student2");
+q.Enqueue("Student3");
+Console.WriteLine("Dequeued : " + q.Dequeue());
+Console.WriteLine("Remaining Students");
+foreach (object item in q)
+{
+Console.WriteLine(item);
+}
+Console.ReadKey();
+}
+
+}
+}
+5.4 Dictionary Collection
+using System;
+using System.Collections.Generic;
+namespace CollectionsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+Dictionary<int, string> students = new Dictionary<int, string>();
+students.Add(101, "Rahul");
+students.Add(102, "Neha");
+students.Add(103, "Amit");
+foreach (KeyValuePair<int, string> item in students)
+{
+Console.WriteLine(item.Key + " " + item.Value);
+}
+Console.ReadKey();
+}
+}
+}
+5.5 HashSet Collection
+using System;
+using System.Collections.Generic;
+namespace CollectionsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+HashSet<int> numbers = new HashSet<int>();
+numbers.Add(10);
+numbers.Add(20);
+numbers.Add(30);
+numbers.Add(20);
+foreach (int n in numbers)
+{
+Console.WriteLine(n);
+}
+Console.ReadKey();
+}
+}
+}
+5.6 LINQ Where (Filter Data)
+
+using System;
+using System.Linq;
+namespace LINQDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+int[] numbers = { 12, 45, 20, 5, 80, 32 };
+var result = from n in numbers
+where n > 20
+select n;
+Console.WriteLine("Numbers Greater Than 20");
+foreach (int n in result)
+{
+Console.WriteLine(n);
+}
+Console.ReadKey();
+}
+}
+}
+5.7 LINQ OrderBy
+using System;
+using System.Linq;
+namespace LINQDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+int[] marks = { 65, 40, 95, 80, 70 };
+var result = from m in marks
+orderby m
+select m;
+foreach (int m in result)
+{
+Console.WriteLine(m);
+}
+Console.ReadKey();
+}
+}
+}
+5.8 LINQ Select (Projection)
+using System;
+using System.Linq;
+namespace LINQDemo
+{
+class Program
+{
+
+static void Main(string[] args)
+{
+string[] names = { "Rahul", "Amit", "Neha" };
+var upper = names.Select(x => x.ToUpper());
+foreach (string s in upper)
+{
+Console.WriteLine(s);
+}
+Console.ReadKey();
+}
+}
+}
+5.9 LINQ GroupBy
+using System;
+using System.Linq;
+class Student
+{
+public string Name { get; set; }
+public string Department { get; set; }
+}
+class Program
+{
+static void Main()
+{
+Student[] students =
+{
+new Student{Name="Rahul",Department="IT"},
+new Student{Name="Neha",Department="CS"},
+new Student{Name="Amit",Department="IT"},
+new Student{Name="Priya",Department="CS"}
+};
+var groups = students.GroupBy(x => x.Department);
+foreach (var g in groups)
+{
+Console.WriteLine(g.Key);
+foreach (var s in g)
+{
+Console.WriteLine(s.Name);
+}
+Console.WriteLine();
+}
+Console.ReadKey();
+}
+}
+5.10 LINQ Count, Max and Average
+using System;
+using System.Linq;
+namespace LINQDemo
+
+{
+class Program
+{
+static void Main(string[] args)
+{
+int[] marks = { 78, 45, 90, 66, 82 };
+Console.WriteLine("Count = " + marks.Count());
+Console.WriteLine("Maximum = " + marks.Max());
+Console.WriteLine("Minimum = " + marks.Min());
+Console.WriteLine("Average = " + marks.Average());
+Console.ReadKey();
+}
+}
+}
+5.11 LINQ First and Last
+using System;
+using System.Linq;
+namespace LINQDemo
+{
+class Program
+{
+static void Main()
+{
+int[] numbers = { 10, 20, 30, 40, 50 };
+Console.WriteLine("First : " + numbers.First());
+Console.WriteLine("Last : " + numbers.Last());
+Console.ReadKey();
+}
+}
+}
+5.12 LINQ Join
+using System;
+using System.Linq;
+class Student
+{
+public int Id;
+public string Name;
+}
+class Result
+{
+public int Id;
+public int Marks;
+}
+class Program
+{
+static void Main()
+{
+Student[] students =
+{
+new Student{Id=1,Name="Rahul"},
+new Student{Id=2,Name="Neha"},
+
+new Student{Id=3,Name="Amit"}
+};
+Result[] results =
+{
+new Result{Id=1,Marks=85},
+new Result{Id=2,Marks=90},
+new Result{Id=3,Marks=80}
+};
+var query = from s in students
+join r in results
+on s.Id equals r.Id
+select new
+{
+s.Name,
+r.Marks
+};
+foreach (var item in query)
+{
+Console.WriteLine(item.Name + " " + item.Marks);
+}
+Console.ReadKey();
+}
+}
