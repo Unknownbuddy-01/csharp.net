@@ -1,0 +1,195 @@
+Q. 1-a Write a C# .NET Core program to create a class named Student with data
+members Roll Number and Name. Create an object of the class and display the student
+information.
+using System;
+namespace StudentDemo
+{
+class Student
+{
+public int RollNo;
+public string Name;
+public void Display()
+{
+Console.WriteLine("Roll No: " + RollNo);
+Console.WriteLine("Name: " + Name);
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+Student s = new Student();
+s.RollNo = 101;
+s.Name = "Rahul";
+s.Display();
+Console.ReadLine();
+}
+}
+}
+Constructor
+Q. 1-b. Write a program to demonstrate the use of a constructor for initializing
+employee information.
+using System;
+namespace ConstructorDemo
+{
+class Employee
+{
+
+int empId;
+string empName;
+public Employee(int id, string name)
+{
+empId = id;
+empName = name;
+}
+public void Display()
+{
+Console.WriteLine("Employee ID: " + empId);
+Console.WriteLine("Employee Name: " + empName);
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+Employee e = new Employee(1, "Priya");
+e.Display();
+Console.ReadLine();
+}
+}
+}
+Inheritance
+Q. 1-c. Write a program to demonstrate single inheritance by creating a Person class
+and deriving a Student class from it.
+using System;
+namespace SingleInheritance
+{
+class Person
+{
+public string Name = "Amit";
+}
+class Student : Person
+{
+public void Display()
+{
+Console.WriteLine("Student Name: " + Name);
+}
+}
+
+class Program
+{
+static void Main(string[] args)
+{
+Student s = new Student();
+s.Display();
+Console.ReadLine();
+}
+}
+}
+Method Overloading
+Q. 1-d. Write a program to demonstrate method overloading by creating multiple
+methods to calculate the sum of numbers.
+using System;
+namespace MethodOverloading
+{
+class Addition
+{
+public int Sum(int a, int b)
+{
+return a + b;
+}
+public int Sum(int a, int b, int c)
+{
+return a + b + c;
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+Addition obj = new Addition();
+Console.WriteLine("Sum = " + obj.Sum(10, 20));
+Console.WriteLine("Sum = " + obj.Sum(10, 20, 30));
+Console.ReadLine();
+}
+}
+}
+Interface
+
+Q. 1-e.Write a program to demonstrate the use of an interface.
+using System;
+namespace InterfaceDemo
+{
+interface IPrinter
+{
+void Print();
+}
+class Document : IPrinter
+{
+public void Print()
+{
+Console.WriteLine("Document is printing...");
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+Document d = new Document();
+d.Print();
+Console.ReadLine();
+}
+}
+}
+Program on Delegates
+Pract 2. Write a program to create a delegate that displays a welcome message.
+using System;
+namespace DelegateDemo
+{
+delegate void Message();
+class Program
+{
+static void Welcome()
+{
+Console.WriteLine("Welcome to C# Delegates!");
+}
+static void Main(string[] args)
+{
+Message msg = Welcome;
+
+msg();
+Console.ReadLine();
+}
+}
+}
+Programs on Events
+Practical 3. Write a program to create an event that displays a message when a button
+click event occurs.
+using System;
+namespace EventDemo
+{
+class Button
+{
+public delegate void ClickHandler();
+public event ClickHandler Click;
+public void OnClick()
+{
+if (Click != null)
+Click();
+}
+}
+class Program
+{
+static void Display()
+{
+Console.WriteLine("Button Clicked!");
+}
+static void Main(string[] args)
+{
+Button b = new Button();
+b.Click += Display;
+b.OnClick();
+Console.ReadLine();
+}
+}
+}
