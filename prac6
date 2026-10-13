@@ -1,0 +1,179 @@
+Program 1: Handling Divide by Zero Exception
+using System;
+namespace ExceptionDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+int a = 20;
+int b = 0;
+try
+{
+int result = a / b;
+Console.WriteLine("Result = " + result);
+}
+catch (DivideByZeroException ex)
+{
+Console.WriteLine("Exception: " + ex.Message);
+}
+
+finally
+{
+Console.WriteLine("Finally block executed.");
+}
+Console.ReadLine();
+}
+}
+}
+
+Program 2: Multiple Catch Blocks
+using System;
+namespace ExceptionDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+try
+{
+Console.Write("Enter first number: ");
+int a = int.Parse(Console.ReadLine());
+Console.Write("Enter second number: ");
+int b = int.Parse(Console.ReadLine());
+int result = a / b;
+Console.WriteLine("Result = " + result);
+}
+catch (FormatException)
+{
+Console.WriteLine("Please enter numeric values.");
+}
+catch (DivideByZeroException)
+{
+Console.WriteLine("Cannot divide by zero.");
+}
+catch (Exception ex)
+{
+Console.WriteLine(ex.Message);
+}
+Console.ReadLine();
+
+}
+}
+}
+
+Program 3: Custom Exception
+using System;
+class AgeException : Exception
+{
+public AgeException(string message) : base(message)
+{
+}
+}
+class Program
+{
+static void Main()
+{
+int age = 15;
+try
+{
+if (age < 18)
+{
+throw new AgeException("Age must be 18 or above.");
+}
+Console.WriteLine("Eligible");
+}
+catch (AgeException ex)
+{
+Console.WriteLine(ex.Message);
+}
+Console.ReadLine();
+}
+}
+
+Program 4: Basic Asynchronous Programming using async and await
+
+using System;
+using System.Threading.Tasks;
+class Program
+{
+static async Task Main(string[] args)
+{
+Console.WriteLine("Process Started...");
+await DoWorkAsync();
+Console.WriteLine("Process Completed.");
+Console.ReadLine();
+}
+static async Task DoWorkAsync()
+{
+Console.WriteLine("Working...");
+await Task.Delay(3000);
+Console.WriteLine("Work Finished.");
+}
+}
+
+
+Program 5: Download Simulation Using Async
+using System;
+using System.Threading.Tasks;
+class Program
+{
+static async Task Main()
+{
+Console.WriteLine("Downloading file...");
+string file = await DownloadFileAsync();
+Console.WriteLine(file);
+
+Console.ReadLine();
+}
+static async Task<string> DownloadFileAsync()
+{
+await Task.Delay(5000);
+return "Download Completed Successfully.";
+}
+}
+
+Program 6: Running Multiple Tasks
+using System;
+using System.Threading.Tasks;
+class Program
+{
+static async Task Main()
+{
+Task task1 = Task.Run(() =>
+{
+Console.WriteLine("Task 1 Started");
+Task.Delay(2000).Wait();
+Console.WriteLine("Task 1 Completed");
+});
+Task task2 = Task.Run(() =>
+{
+Console.WriteLine("Task 2 Started");
+Task.Delay(1000).Wait();
+Console.WriteLine("Task 2 Completed");
+});
+await Task.WhenAll(task1, task2);
+Console.WriteLine("All Tasks Completed.");
+Console.ReadLine();
+}
+}
+
+Program 7: Reading User Input with Exception Handling
+using System;
+class Program
+{
+static void Main()
+{
+try
+{
+Console.Write("Enter your age: ");
+int age = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Your Age is: " + age);
+}
+catch (FormatException)
+{
+Console.WriteLine("Invalid input. Enter numbers only.");
+}
+Console.ReadLine();
+}
+}
