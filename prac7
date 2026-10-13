@@ -1,0 +1,204 @@
+1. Program on Reflection
+Aim: To inspect a class, its properties, methods, and constructors at runtime using Reflection.
+Steps in Visual Studio 2019
+ Open Visual Studio 2019
+ Select Create a new project
+ Choose Console App (.NET Core) or Console App (.NET Framework)
+ Name it ReflectionDemo
+ Replace the code in Program.cs.
+using System;
+using System.Reflection;
+class Student
+{
+public int RollNo { get; set; }
+public string Name { get; set; }
+public Student()
+{
+}
+public void Display()
+{
+Console.WriteLine("Roll No: " + RollNo);
+Console.WriteLine("Name: " + Name);
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+Type type = typeof(Student);
+Console.WriteLine("Class Name: " + type.Name);
+Console.WriteLine("\nProperties:");
+foreach (PropertyInfo property in type.GetProperties())
+{
+Console.WriteLine(property.Name);
+}
+Console.WriteLine("\nMethods:");
+foreach (MethodInfo method in type.GetMethods())
+{
+Console.WriteLine(method.Name);
+}
+
+Console.WriteLine("\nConstructors:");
+foreach (ConstructorInfo constructor in type.GetConstructors())
+{
+Console.WriteLine(constructor.Name);
+}
+Console.ReadLine();
+}
+}
+Expected Output
+Class Name: Student
+Properties:
+RollNo
+Name
+Methods:
+Display
+GetType
+ToString
+Equals
+GetHashCode
+Constructors:
+.ctor
+2. Program on Metadata using Custom Attributes
+Aim: To create and read metadata using a custom attribute.
+using System;
+[AttributeUsage(AttributeTargets.Class)]
+class StudentInfoAttribute : Attribute
+{
+public string Department { get; set; }
+public int Year { get; set; }
+public StudentInfoAttribute(string department, int year)
+{
+Department = department;
+Year = year;
+}
+}
+[StudentInfo("Information Technology", 3)]
+class Student
+
+{
+public int RollNo { get; set; }
+public string Name { get; set; }
+}
+class Program
+{
+static void Main(string[] args)
+{
+Type type = typeof(Student);
+StudentInfoAttribute attribute =
+(StudentInfoAttribute)Attribute.GetCustomAttribute(
+type,
+typeof(StudentInfoAttribute));
+Console.WriteLine("Class Name: " + type.Name);
+Console.WriteLine("Department: " + attribute.Department);
+Console.WriteLine("Year: " + attribute.Year);
+Console.ReadLine();
+}
+}
+Expected Output
+Class Name: Student
+Department: Information Technology
+Year: 3
+3. Program on Reflection + Metadata
+Program on how Reflection reads metadata from a class.
+using System;
+using System.Reflection;
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+class InfoAttribute : Attribute
+{
+public string Description { get; }
+public InfoAttribute(string description)
+{
+Description = description;
+}
+}
+[Info("Student information class")]
+class Student
+
+{
+[Info("Displays student information")]
+public void Display()
+{
+Console.WriteLine("Student Display Method");
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+Type type = typeof(Student);
+InfoAttribute classInfo =
+type.GetCustomAttribute<InfoAttribute>();
+Console.WriteLine("Class Metadata:");
+Console.WriteLine(classInfo.Description);
+MethodInfo method = type.GetMethod("Display");
+InfoAttribute methodInfo =
+method.GetCustomAttribute<InfoAttribute>();
+Console.WriteLine("\nMethod Metadata:");
+Console.WriteLine(methodInfo.Description);
+Console.ReadLine();
+}
+}
+Expected Output
+Class Metadata:
+Student information class
+Method Metadata:
+Displays student information
+5. Program on Managed Memory
+Aim: To demonstrate memory managed automatically by the .NET Garbage Collector.
+using System;
+class Student
+{
+public string Name;
+
+public Student(string name)
+{
+Name = name;
+}
+~Student()
+{
+Console.WriteLine("Student object is being destroyed.");
+}
+}
+class Program
+{
+static void Main(string[] args)
+{
+Student student = new Student("Rahul");
+Console.WriteLine("Student: " + student.Name);
+student = null;
+GC.Collect();
+GC.WaitForPendingFinalizers();
+Console.WriteLine("Garbage Collection completed.");
+Console.ReadLine();
+}
+}
+Output
+Possible output:
+Student: Rahul
+Student object is being destroyed.
+Garbage Collection completed.
+6. Program on Unmanaged Memory
+Aim: To allocate and release memory manually using unmanaged memory.
+using System;
+using System.Runtime.InteropServices;
+class Program
+{
+static void Main(string[] args)
+{
+int size = 20;
+
+IntPtr memory = Marshal.AllocHGlobal(size);
+Console.WriteLine("Unmanaged memory allocated.");
+Console.WriteLine("Memory Address: " + memory);
+Marshal.FreeHGlobal(memory);
+Console.WriteLine("Unmanaged memory released.");
+Console.ReadLine();
+}
+}
+Output
+Example:
+Unmanaged memory allocated.
+Memory Address: 12345678
+Unmanaged memory released.
+The actual memory address will vary.
