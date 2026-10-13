@@ -1,0 +1,303 @@
+Program 1: Create and Write to a File
+Aim : Create a text file and write student information into it.
+Program
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+string fileName = "student.txt";
+File.WriteAllText(fileName,
+"Name: Rahul\nCourse: BSc IT\nRoll No: 101");
+Console.WriteLine("Data written successfully.");
+Console.WriteLine("File Name: " + fileName);
+Console.ReadKey();
+}
+}
+}
+Output
+Data written successfully.
+File Name: student.txt
+Program 2: Read Data from a File
+Aim
+Read and display the contents of a text file.
+Program
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+
+class Program
+{
+static void Main(string[] args)
+{
+string fileName = "student.txt";
+if (File.Exists(fileName))
+{
+string data = File.ReadAllText(fileName);
+Console.WriteLine("File Contents:");
+Console.WriteLine(data);
+}
+else
+{
+Console.WriteLine("File does not exist.");
+}
+Console.ReadKey();
+}
+}
+}
+Output
+File Contents:
+Name: Rahul
+Course: BSc IT
+Roll No: 101
+Program 3: Append Data to a File
+Aim
+Add new data to an existing file without deleting its previous contents.
+Program
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+string fileName = "student.txt";
+File.AppendAllText(fileName,
+"\nMarks: 85");
+
+Console.WriteLine("Data appended successfully.");
+Console.ReadKey();
+}
+}
+}
+Program 4: Copy, Move and Delete a File
+Aim
+Perform basic file-system operations.
+Program
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+string original = "student.txt";
+string copy = "student_backup.txt";
+string moved = "student_new.txt";
+// Create original file
+File.WriteAllText(original, "Student information");
+// Copy file
+File.Copy(original, copy, true);
+Console.WriteLine("File copied.");
+// Move file
+File.Move(copy, moved);
+Console.WriteLine("File moved.");
+// Delete moved file
+File.Delete(moved);
+Console.WriteLine("File deleted.");
+Console.ReadKey();
+}
+}
+}
+Output
+File copied.
+File moved.
+
+File deleted.
+Program 5: Create and Manage a Directory
+Aim
+Create a folder and store a file inside it.
+Program
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+string folderName = "StudentData";
+if (!Directory.Exists(folderName))
+{
+Directory.CreateDirectory(folderName);
+Console.WriteLine("Directory created.");
+}
+string fileName =
+Path.Combine(folderName, "student.txt");
+File.WriteAllText(fileName,
+"Name: Priya\nCourse: BSc IT");
+Console.WriteLine("File created inside directory.");
+Console.ReadKey();
+}
+}
+}
+Output
+Directory created.
+File created inside directory.
+Program 6: Display All Files in a Directory
+Aim
+Display all files present in a specified directory.
+Program
+
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+string folder = "StudentData";
+if (Directory.Exists(folder))
+{
+string[] files = Directory.GetFiles(folder);
+Console.WriteLine("Files in directory:");
+foreach (string file in files)
+{
+Console.WriteLine(file);
+}
+}
+else
+{
+Console.WriteLine("Directory does not exist.");
+}
+Console.ReadKey();
+}
+}
+}
+Explanation
+Directory.GetFiles() returns the names of files present in the specified directory.
+Program 7: Write Data Using StreamWriter
+Aim
+Write multiple lines to a file using StreamWriter.
+Program
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+
+{
+using (StreamWriter writer =
+new StreamWriter("students.txt"))
+{
+writer.WriteLine("Student Details");
+writer.WriteLine("----------------");
+writer.WriteLine("101 - Rahul");
+writer.WriteLine("102 - Priya");
+writer.WriteLine("103 - Amit");
+}
+Console.WriteLine("Data written using StreamWriter.");
+Console.ReadKey();
+}
+}
+}
+Output
+Data written using StreamWriter.
+The file students.txt will contain:
+Student Details
+----------------
+101 - Rahul
+102 - Priya
+103 - Amit
+Program 8: Read Data Using StreamReader
+Aim
+Read a text file line by line using StreamReader.
+Program
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+using (StreamReader reader =
+new StreamReader("students.txt"))
+{
+string line;
+
+while ((line = reader.ReadLine()) != null)
+{
+Console.WriteLine(line);
+}
+}
+Console.ReadKey();
+}
+}
+}
+Explanation
+ReadLine() reads one line at a time. The loop continues until the end of the file is reached.
+Program 9: Copy a File Using FileStream
+Aim
+Copy the contents of one file to another using FileStream.
+Program
+using System;
+using System.IO;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+string source = "students.txt";
+string destination = "students_copy.txt";
+using (FileStream input =
+new FileStream(source, FileMode.Open))
+using (FileStream output =
+new FileStream(destination, FileMode.Create))
+{
+input.CopyTo(output);
+}
+Console.WriteLine("File copied using FileStream.");
+Console.ReadKey();
+}
+}
+}
+Program 10: Write and Read Bytes Using FileStream
+
+Aim
+Write data as bytes and read it using FileStream.
+Program
+using System;
+using System.IO;
+using System.Text;
+namespace FilesStreamsDemo
+{
+class Program
+{
+static void Main(string[] args)
+{
+string fileName = "data.txt";
+string text = "Hello from FileStream!";
+byte[] data = Encoding.UTF8.GetBytes(text);
+// Writing
+using (FileStream stream =
+new FileStream(fileName, FileMode.Create))
+{
+stream.Write(data, 0, data.Length);
+}
+// Reading
+using (FileStream stream =
+new FileStream(fileName, FileMode.Open))
+{
+byte[] readData = new byte[stream.Length];
+stream.Read(readData, 0, readData.Length);
+string result =
+Encoding.UTF8.GetString(readData);
+Console.WriteLine(result);
+}
+Console.ReadKey();
+}
+}
+}
+Output
+Hello from FileStream!
