@@ -1,0 +1,195 @@
+2. Addition of 2 number 
+using System;
+
+class program
+{
+    static void Main(string[] args)
+    {
+        int a = 10;
+        int b = 20;
+        int sum = a + b;
+
+        Console.WriteLine("First Number = " + a);
+        Console.WriteLine("Second Number = " + b);
+        Console.WriteLine("Sum = " + sum);
+
+        Console.ReadKey();
+    }
+}
+
+3. Even or odd
+using System;
+
+class program
+{
+    static void Main(string[] args)
+    {
+        int num = 15;
+
+        if (num % 2 == 0)
+            Console.WriteLine(num + "is Even");
+        else
+            Console.WriteLine(num + " is Odd");
+
+        Console.ReadKey();
+    }
+}
+
+4. Largest of 2 number 
+using System;
+
+class program
+{
+    static void Main(string[] args)
+    {
+        int a = 25;
+        int b = 18;
+
+        if (a > b)
+            Console.WriteLine(a + " is Greater");
+        else
+            Console.WriteLine(b + " is Greater");
+
+        Console.ReadKey();
+    }
+}
+
+5. Multiplication table 
+using System;
+
+class program
+{
+    static void Main(string[] args)
+    {
+        int n = 5;
+
+        for (int i = 1; i <= 10; i++)
+        {
+            Console.WriteLine(n + " x " + i + " = " + (n * i));
+        }
+
+        Console.ReadKey();
+    }
+}
+
+6. Factorial of a number 
+using System;
+
+class program
+{
+    static void Main(string[] args)
+    {
+        int n = 5;
+        int fact = 1;
+
+        for (int i = 1; i <= n; i++)
+        {
+            fact = fact * i;
+            Console.WriteLine("Factorial = " + fact);
+        }
+
+        Console.ReadKey();
+    }
+}
+
+7. Reverse number 
+using System;
+
+namespace practgical1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num = 12345;
+            int reverse = 0;
+            int temp = num;
+
+            while (temp != 0)
+            {
+                reverse = reverse * 10 + (temp % 10);
+                temp /= 10;
+            }
+
+            Console.WriteLine("Reverse of " + num + " = " + reverse);
+        }
+    }
+}
+
+8. Check prime number 
+ using System;
+
+namespace practgical1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num = 17;
+            bool isPrime = true;
+
+            if (num <= 1)
+                isPrime = false;
+            else
+            {
+                for (int i = 2; i <= Math.Sqrt(num); i++)
+                {
+                    if (num % i == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+            }
+
+            if (isPrime)
+                Console.WriteLine(num + " is Prime Number");
+            else
+                Console.WriteLine(num + " is Not Prime Number");
+        }
+    }
+}
+
+10. Simple calculator
+using System;
+
+namespace practgical1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 20;
+            int b = 10;
+            char op = '+';
+
+            switch (op)
+            {
+                case '+':
+                    Console.WriteLine("Result = " + (a + b));
+                    break;
+
+                case '-':
+                    Console.WriteLine("Result = " + (a - b));
+                    break;
+
+                case '*':
+                    Console.WriteLine("Result = " + (a * b));
+                    break;
+
+                case '/':
+                    if (b != 0)
+                        Console.WriteLine("Result = " + (a / b));
+                    else
+                        Console.WriteLine("Cannot divide by zero");
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid Operator");
+                    break;
+            }
+        }
+    }
+}
+
+
